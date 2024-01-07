@@ -1,10 +1,11 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 
+import env from "./util/validateEnv";
 import app from "./app";
 import { connectDb } from "./config/dbConnect";
 
-const PORT = process.env.PORT || 3000;
+const PORT = env.PORT;
 
 connectDb();
 

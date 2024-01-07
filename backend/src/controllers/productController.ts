@@ -10,7 +10,7 @@ export const getProducts = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const product = await getById(req.params.id);
-        console.log(product);
+
         res.json(product);
     } catch (error: any) {
         console.log(error.message);
