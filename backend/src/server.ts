@@ -1,6 +1,5 @@
-import { config } from "dotenv";
-config();
-import mongoose, { mongo } from "mongoose";
+import "dotenv/config";
+import mongoose from "mongoose";
 
 import app from "./app";
 import { connectDb } from "./config/dbConnect";
