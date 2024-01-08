@@ -2,11 +2,21 @@ import { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
 
-import { catchAsync } from "./../errorHandlers";
+import { catchAsync } from "../util/errorHandlers";
 import * as productService from "../services/productService";
 
 export const getProducts: RequestHandler = catchAsync(async (req, res) => {
-    const products = await productService.getAll();
+    let products = await productService.getAll();
+
+    if (req.query.title) {
+        const title = req.query.title as string;
+        products = products.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()));
+    }
+
+    if (req.query.category) {
+        const category = req.query.category as string;
+        products = products.filter((product) => product.category?.toLowerCase().includes(category.toLowerCase()));
+    }
 
     res.status(200).json(products);
 });

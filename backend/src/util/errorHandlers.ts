@@ -1,5 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import createHttpError, { isHttpError } from "http-errors";
+import mongoose from "mongoose";
 
 export const globalErrorHandler = (error: unknown, req: Request, res: Response, next: NextFunction) => {
     let errorMessage = "An unknown error occurred";
@@ -8,6 +9,13 @@ export const globalErrorHandler = (error: unknown, req: Request, res: Response, 
     if (isHttpError(error)) {
         errorMessage = error.message;
         statusCode = error.status;
+    }
+
+    if (error instanceof mongoose.Error.ValidationError) {
+        errorMessage = Object.values(error.errors)
+            .map((value) => value.message)
+            .join(", ");
+        statusCode = 400;
     }
 
     res.status(statusCode).json({ message: errorMessage });

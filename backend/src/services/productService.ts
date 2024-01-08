@@ -27,6 +27,7 @@ export const create = async (product: CreateProductDto) => {
 export const update = async (productId: string, updatedProduct: UpdateProductDto) => {
     return await Product.findByIdAndUpdate(productId, updatedProduct, {
         new: true,
+        runValidators: true,
     }).exec();
 };
 
