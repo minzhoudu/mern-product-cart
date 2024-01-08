@@ -1,21 +1,15 @@
-import { ProductDto } from "../Dto/productDto";
+import { CreateProductDto, UpdateProductDto } from "../Dto/productDto";
 import Product from "../models/Product";
 
-export const getAllProducts = async () => {
+export const getAll = async () => {
     return await Product.find().exec();
 };
 
-export const getById = async (id: string) => {
-    const product = await Product.findById(id).exec();
-
-    if (!product) {
-        throw new Error("Product not found");
-    }
-
-    return product;
+export const getById = async (productId: string) => {
+    return await Product.findById(productId).exec();
 };
 
-export const createProduct = async (product: ProductDto) => {
+export const create = async (product: CreateProductDto) => {
     return await Product.create({
         title: product.title,
         description: product.description,
@@ -30,6 +24,12 @@ export const createProduct = async (product: ProductDto) => {
     });
 };
 
-export const deleteById = async (id: string) => {
-    return await Product.findByIdAndDelete(id).exec();
+export const update = async (productId: string, updatedProduct: UpdateProductDto) => {
+    return await Product.findByIdAndUpdate(productId, updatedProduct, {
+        new: true,
+    }).exec();
+};
+
+export const deleteById = async (productId: string) => {
+    return await Product.findByIdAndDelete(productId).exec();
 };

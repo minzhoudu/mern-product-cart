@@ -2,14 +2,14 @@ import { InferSchemaType, Schema, model } from "mongoose";
 
 export const ProductSchema = new Schema(
     {
-        title: { type: String, required: [true, "Title is missing"] },
-        description: String,
-        price: { type: Number, required: [true, "Price is missing"] },
-        discountPrice: Number,
-        rating: { type: Number, default: 0 },
-        stock: { type: Number, default: 0 },
-        brand: String,
-        category: String,
+        title: { type: String, required: [true, "Title is missing"], trim: true },
+        description: { type: String, trim: true },
+        price: { type: Number, required: [true, "Price is missing"], min: [0, "Price must be greater than 0"] },
+        discountPrice: { type: Number, min: [0, "Discount price must be greater than 0"] },
+        rating: { type: Number, default: 0, min: [0, "Rating must be greater than 0"] },
+        stock: { type: Number, default: 0, min: [0, "Stock must be greater than 0"] },
+        brand: { type: String, lowercase: true, trim: true },
+        category: { type: String, lowercase: true, trim: true },
         thumbnail: String,
         images: [String],
     },
