@@ -1,7 +1,7 @@
 import Product from "../models/Product";
 
 export const getAllProducts = async () => {
-    return await Product.find({});
+    return await Product.find().exec();
 };
 
 export const getById = async (id: string) => {
@@ -30,5 +30,5 @@ export const createProduct = async () => {
 };
 
 export const deleteById = async (id: string) => {
-    return await Product.findByIdAndDelete(id);
+    return await Product.findByIdAndDelete(id).exec();
 };
