@@ -2,9 +2,9 @@ import { InferSchemaType, Schema, model } from "mongoose";
 
 export const ProductSchema = new Schema(
     {
-        title: { type: String, required: true },
+        title: { type: String, required: [true, "Title is missing"] },
         description: String,
-        price: { type: Number, required: true },
+        price: { type: Number, required: [true, "Price is missing"] },
         discountPrice: Number,
         rating: { type: Number, default: 0 },
         stock: { type: Number, default: 0 },
@@ -13,7 +13,7 @@ export const ProductSchema = new Schema(
         thumbnail: String,
         images: [String],
     },
-    { timestamps: true }
+    { timestamps: true, versionKey: false }
 );
 
 export type Product = InferSchemaType<typeof ProductSchema>;

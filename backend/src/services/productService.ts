@@ -1,3 +1,4 @@
+import { ProductDto } from "../Dto/productDto";
 import Product from "../models/Product";
 
 export const getAllProducts = async () => {
@@ -14,18 +15,18 @@ export const getById = async (id: string) => {
     return product;
 };
 
-export const createProduct = async () => {
+export const createProduct = async (product: ProductDto) => {
     return await Product.create({
-        title: "Product 1",
-        description: "Product 1 description",
-        price: 100,
-        discountPrice: 90,
-        rating: 4.5,
-        stock: 10,
-        brand: "Brand 1",
-        category: "Category 1",
-        thumbnail: "https://picsum.photos/200",
-        images: ["https://picsum.photos/200"],
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        discountPrice: product.discountPrice,
+        rating: product.rating,
+        stock: product.stock,
+        brand: product.brand,
+        category: product.category,
+        thumbnail: product.thumbnail,
+        images: product.images,
     });
 };
 

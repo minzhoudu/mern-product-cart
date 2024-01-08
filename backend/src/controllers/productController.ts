@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
-import { createProduct, deleteById, getAllProducts, getById } from "../services/productService";
+import * as productService from "../services/productService";
 
 export const getProducts: RequestHandler = async (req, res, next) => {
     try {
-        const products = await getAllProducts();
+        const products = await productService.getAllProducts();
 
         res.status(200).json(products);
     } catch (error) {
@@ -11,15 +11,19 @@ export const getProducts: RequestHandler = async (req, res, next) => {
     }
 };
 
-export const createNewProduct: RequestHandler = async (req, res) => {
-    const product = await createProduct();
+export const createNewProduct: RequestHandler = async (req, res, next) => {
+    try {
+        const product = await productService.createProduct(req.body);
 
-    res.status(201).json(product);
+        res.status(201).json(product);
+    } catch (error) {
+        next(error);
+    }
 };
 
 export const getProductById: RequestHandler = async (req, res, next) => {
     try {
-        const product = await getById(req.params.id);
+        const product = await productService.getById(req.params.id);
 
         res.status(200).json(product);
     } catch (error: any) {
@@ -28,7 +32,7 @@ export const getProductById: RequestHandler = async (req, res, next) => {
 };
 
 export const deleteProduct: RequestHandler = async (req, res) => {
-    const product = await deleteById(req.params.id);
+    const product = await productService.deleteById(req.params.id);
 
     res.json({
         message: "Product removed",
