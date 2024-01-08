@@ -1,6 +1,6 @@
 import { InferSchemaType, Schema, model } from "mongoose";
 
-export const ProductSchema = new Schema(
+const ProductSchema = new Schema(
     {
         title: { type: String, required: [true, "Title is missing"], trim: true },
         description: { type: String, trim: true },
