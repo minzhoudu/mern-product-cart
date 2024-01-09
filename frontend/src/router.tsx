@@ -1,14 +1,10 @@
-import { Outlet, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import Navbar from "./components/RouterWrapper";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: (
-            <div>
-                <h1>Nav</h1>
-                <Outlet />
-            </div>
-        ),
+        element: <Navbar />,
         children: [
             {
                 index: true,
