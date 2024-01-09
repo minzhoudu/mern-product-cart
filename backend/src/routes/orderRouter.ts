@@ -7,6 +7,6 @@ const router = Router();
 router.post("/", createOrder);
 
 router.get("/:orderId", getOrderById);
-router.delete("/", deleteOrder);
+router.delete("/:orderId", deleteOrder);
 
 export default router;

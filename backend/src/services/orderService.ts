@@ -3,7 +3,7 @@ import Order from "../models/Order";
 import Product from "../models/Product";
 
 export const getById = async (orderId: string) => {
-    return await Order.findById(orderId);
+    return await Order.findById(orderId).exec();
 };
 
 export const createNewOrder = async (order: CreateOrderDto) => {
@@ -31,7 +31,10 @@ export const createNewOrder = async (order: CreateOrderDto) => {
 
 //TODO
 export const updateOrder = async (orderId: string) => {};
-export const deleteOrder = async (orderId: string) => {};
+
+export const deleteOrder = async (orderId: string) => {
+    return await Order.findByIdAndDelete(orderId).exec();
+};
 
 const calculateTotalQuantity = (order: CreateOrderDto) => {
     return order.products.reduce((acc, product) => acc + product.quantity, 0);

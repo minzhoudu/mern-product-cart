@@ -24,4 +24,11 @@ export const createOrder: RequestHandler = catchAsync(async (req, res) => {
 
 export const updateOrder: RequestHandler = catchAsync(async (req, res) => {});
 
-export const deleteOrder: RequestHandler = catchAsync(async (req, res) => {});
+export const deleteOrder: RequestHandler = catchAsync(async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.orderId)) throw createHttpError(400, "Invalid order id");
+    const order = await orderService.deleteOrder(req.params.orderId);
+
+    if (!order) throw createHttpError(404, "Order with that id not found");
+
+    res.status(200).json({ message: "Order deleted" });
+});
