@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/products", productsRouter);
-app.use("/api/order", orderRouter);
+app.use("/api/orders", orderRouter);
 
 app.use(notFoundErrorHandler);
 app.use(globalErrorHandler);

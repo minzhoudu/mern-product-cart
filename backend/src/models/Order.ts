@@ -1,9 +1,13 @@
 import { InferSchemaType, Schema, model } from "mongoose";
-import Product from "./Product";
 
 const OrderSchema = new Schema(
     {
-        products: [Product],
+        products: [
+            {
+                productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+                quantity: { type: Number, default: 1 },
+            },
+        ],
         total: { type: Number, defalut: 0 },
         discountedTotal: { type: Number, defalut: 0 },
         totalProducts: { type: Number, defalut: 0 },
@@ -15,6 +19,6 @@ const OrderSchema = new Schema(
     }
 );
 
-export type Order = InferSchemaType<typeof OrderSchema>;
+export type IOrder = InferSchemaType<typeof OrderSchema>;
 
-export default model<Order>("Order", OrderSchema);
+export default model<IOrder>("Order", OrderSchema);
