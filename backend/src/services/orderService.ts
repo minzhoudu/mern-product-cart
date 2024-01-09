@@ -7,32 +7,38 @@ export const getById = async (orderId: string) => {
 };
 
 export const createNewOrder = async (order: CreateOrderDto) => {
-    const prodlen = order.products.length;
+    let total = 0;
+    let discountedTotal = 0;
+
+    for (let orderProduct of order.products) {
+        const currentProduct = await Product.findById(orderProduct.productId);
+        if (!currentProduct?.price) continue;
+
+        const productDiscountedPrice = calculateDiscountedPrice(currentProduct.price, currentProduct.discountPrice);
+
+        total += currentProduct.price * orderProduct.quantity;
+        discountedTotal += productDiscountedPrice * orderProduct.quantity;
+    }
 
     return await Order.create({
         products: order.products,
         totalProducts: order.products.length,
         totalQuantity: calculateTotalQuantity(order),
-        total: await calculateTotalPrice(order),
-        discountedTotal: order.discountedTotal,
+        total,
+        discountedTotal,
     });
 };
 
+//TODO
 export const updateOrder = async (orderId: string) => {};
+export const deleteOrder = async (orderId: string) => {};
 
 const calculateTotalQuantity = (order: CreateOrderDto) => {
     return order.products.reduce((acc, product) => acc + product.quantity, 0);
 };
 
-const calculateTotalPrice = async (order: CreateOrderDto) => {
-    let totalPrice = 0;
+const calculateDiscountedPrice = (originalPrice: number, discountPercentage: number | null | undefined) => {
+    if (!discountPercentage) return originalPrice;
 
-    for (let product of order.products) {
-        const currProduct = await Product.findById(product.productId);
-        
-        if (!currProduct?.price) continue;
-        totalPrice += currProduct?.price * product.quantity;
-    }
-
-    return totalPrice;
+    return originalPrice - (originalPrice * discountPercentage) / 100;
 };

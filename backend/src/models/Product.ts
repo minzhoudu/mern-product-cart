@@ -16,6 +16,6 @@ const ProductSchema = new Schema(
     { timestamps: true, versionKey: false }
 );
 
-export type Product = InferSchemaType<typeof ProductSchema>;
+export type IProduct = InferSchemaType<typeof ProductSchema>;
 
-export default model<Product>("Product", ProductSchema);
+export default model<IProduct>("Product", ProductSchema);

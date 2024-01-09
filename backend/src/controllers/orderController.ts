@@ -22,4 +22,6 @@ export const createOrder: RequestHandler = catchAsync(async (req, res) => {
     res.status(201).json(order);
 });
 
+export const updateOrder: RequestHandler = catchAsync(async (req, res) => {});
+
 export const deleteOrder: RequestHandler = catchAsync(async (req, res) => {});
