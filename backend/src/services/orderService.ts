@@ -1,4 +1,4 @@
-import { CreateOrderDto } from "../Dto/orderDto";
+import { CreateOrderDto, UpdateOrderDto } from "../Dto/orderDto";
 import Order from "../models/Order";
 import Product from "../models/Product";
 
@@ -29,8 +29,27 @@ export const createNewOrder = async (order: CreateOrderDto) => {
     });
 };
 
-//TODO
-export const updateOrder = async (orderId: string) => {};
+export const updateOrder = async (orderId: string, updatedOrder: UpdateOrderDto) => {
+    updatedOrder.totalProducts = updatedOrder.products.length;
+    updatedOrder.totalQuantity = calculateTotalQuantity(updatedOrder);
+    updatedOrder.total = 0;
+    updatedOrder.discountedTotal = 0;
+
+    for (let orderProduct of updatedOrder.products) {
+        const currentProduct = await Product.findById(orderProduct.productId);
+        if (!currentProduct?.price) continue;
+
+        const productDiscountedPrice = calculateDiscountedPrice(currentProduct.price, currentProduct.discountPrice);
+
+        updatedOrder.total += currentProduct.price * orderProduct.quantity;
+        updatedOrder.discountedTotal += productDiscountedPrice * orderProduct.quantity;
+    }
+
+    return await Order.findByIdAndUpdate(orderId, updatedOrder, {
+        new: true,
+        runValidators: true,
+    }).exec();
+};
 
 export const deleteOrder = async (orderId: string) => {
     return await Order.findByIdAndDelete(orderId).exec();

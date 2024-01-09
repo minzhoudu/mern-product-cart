@@ -12,3 +12,16 @@ export interface CreateOrderDto {
     total: number;
     discountedTotal: number;
 }
+
+export interface UpdateOrderDto {
+    products: [
+        {
+            productId: mongoose.Types.ObjectId;
+            quantity: number;
+        }
+    ];
+    totalProducts: number;
+    totalQuantity: number;
+    total: number;
+    discountedTotal: number;
+}

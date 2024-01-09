@@ -22,7 +22,17 @@ export const createOrder: RequestHandler = catchAsync(async (req, res) => {
     res.status(201).json(order);
 });
 
-export const updateOrder: RequestHandler = catchAsync(async (req, res) => {});
+export const updateOrder: RequestHandler = catchAsync(async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.orderId)) throw createHttpError(400, "Invalid order id");
+    if (!req.body.products || !req.body.products.length) throw createHttpError(400, "Products are required");
+
+    const updatedOrder = await orderService.updateOrder(req.params.orderId, req.body);
+    console.log(updatedOrder);
+    res.json({
+        message: "Order updated",
+        order: updatedOrder,
+    });
+});
 
 export const deleteOrder: RequestHandler = catchAsync(async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.orderId)) throw createHttpError(400, "Invalid order id");
