@@ -19,7 +19,7 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
     return (
         <div className="flex justify-center pt-10 gap-20">
             <div className="flex flex-col gap-1">
-                <Image url={imgUrl} alt={currentProduct?.title || "productImage"} width={500} height={400} />
+                <Image url={imgUrl} alt={currentProduct?.title || "productImage"} width={300} height={500} />
 
                 <div className="flex">
                     {currentProduct?.images.map((image, index) => {
