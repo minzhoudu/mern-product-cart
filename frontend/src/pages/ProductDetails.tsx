@@ -1,17 +1,24 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Image from "../components/Image";
 import { selectProducts } from "../state/product/productSelector";
+import { AppDispatch } from "../state/store";
+import { addToCart } from "../state/cart/cartSlice";
 
 interface ProductDetailsProps {}
 
 const ProductDetails: FC<ProductDetailsProps> = () => {
     const { pid } = useParams<{ pid: string }>();
+    const dispatch = useDispatch<AppDispatch>();
 
     const products = useSelector(selectProducts);
     const currentProduct = products.find((product) => product._id === pid);
+
+    const addToCartHandler = () => {
+        dispatch(addToCart(currentProduct));
+    };
 
     const defalutImgUrl = "https://dummyimage.com/600x600/000/fff";
     const imgUrl = currentProduct?.thumbnail ? currentProduct.thumbnail : defalutImgUrl;
@@ -54,7 +61,10 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
                     {/*TODO: check stock attribute and show in stock or out of stock, also disable Add To Cart button */}
                     <h2 className="text-center mb-1">{currentProduct?.stock ? "In Stock" : "Out of Stock"}</h2>
 
-                    <button className="p-3 bg-orange-700 border border-orange-700 text-white font-bold rounded-xl hover:bg-white hover:text-orange-700">
+                    <button
+                        onClick={addToCartHandler}
+                        className="p-3 bg-orange-700 border border-orange-700 text-white font-bold rounded-xl hover:bg-white hover:text-orange-700"
+                    >
                         Add To Cart
                     </button>
                 </div>

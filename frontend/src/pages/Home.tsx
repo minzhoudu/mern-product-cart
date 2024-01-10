@@ -22,7 +22,7 @@ const Home: FC<HomeProps> = () => {
     }, [dispatch]);
 
     return (
-        <div className="flex flex-wrap  gap-x-16 gap-y-20 p-20">
+        <div className="flex flex-wrap p-20">
             {filteredProducts.map((product) => {
                 return <ProductTile key={product._id} product={product} />;
             })}
