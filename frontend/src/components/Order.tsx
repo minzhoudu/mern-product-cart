@@ -22,9 +22,9 @@ const Order: FC<OrderProps> = () => {
 
     return (
         <div className="flex flex-col items-center border rounded-3xl py-5 border-red-500 w-1/4">
-            <h1 className="mb-2 font-bold text-xl text-red-500">Order 1</h1>
+            <h1 className="mb-2 font-bold text-xl text-red-500">Order: {order._id}</h1>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 font-semibold">
                 <h2>Total Products: {order.totalProducts}</h2>
                 <h2>Total Quantity: {order.totalQuantity}</h2>
                 <h2>
