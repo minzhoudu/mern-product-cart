@@ -7,8 +7,10 @@ interface ImageProps {
     height: number;
 }
 
-const Image: FC<ImageProps> = ({ url, alt = "image", width, height }) => {
-    return <img className={`w-[${width}px] h-[${height}px]`} src={url} alt={alt} />;
+const Image: FC<ImageProps> = ({ url = "https://dummyimage.com/600x600/000/fff", alt = "image", width, height }) => {
+    const classes = `w-[${width}px] h-[${height}px]`;
+
+    return <img className={classes} src={url} alt={alt} />;
 };
 
 export default Image;

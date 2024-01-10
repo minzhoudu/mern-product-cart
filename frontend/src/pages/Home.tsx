@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectProduct } from "../state/product/productSelector";
+import { selectProducts } from "../state/product/productSelector";
 import ProductTile from "../components/ProductTile";
 import { AppDispatch } from "../state/store";
 import { setProductsAsync } from "../state/product/productSlice";
@@ -9,7 +9,7 @@ import { setProductsAsync } from "../state/product/productSlice";
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
-    const products = useSelector(selectProduct);
+    const products = useSelector(selectProducts);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {

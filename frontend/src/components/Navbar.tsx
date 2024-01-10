@@ -34,7 +34,11 @@ const Navbar: FC<NavbarProps> = () => {
                         </NavLink>
                     </div>
 
-                    <input type="text" placeholder="search..." className="rounded-md h-3/5 w-56 px-3" />
+                    <input
+                        type="text"
+                        placeholder="search..."
+                        className="rounded-md h-3/5 w-56 px-3 border border-black"
+                    />
 
                     <button
                         onClick={openCartHandler}
