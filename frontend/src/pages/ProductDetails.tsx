@@ -59,7 +59,7 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
                 </div>
 
                 <div className="self-center">
-                    {/*TODO: check inventoryQuantity and show in stock or out of stock, also disable Add To Cart button */}
+                    {/*TODO: check stock attribute and show in stock or out of stock, also disable Add To Cart button */}
                     <h2 className="text-center mb-1">In Stock</h2>
 
                     <button className="p-3 bg-orange-700 border border-orange-700 text-white font-bold rounded-xl hover:bg-white hover:text-orange-700">
