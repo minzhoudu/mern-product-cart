@@ -8,6 +8,7 @@ interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
+
     const openCartHandler = () => {
         setIsCartOpen(true);
     };
