@@ -5,13 +5,16 @@ interface ProductTileProps {}
 
 const ProductTile: FC<ProductTileProps> = () => {
     return (
-        <NavLink to="/" className="max-w-72">
+        <NavLink to={`/product/${1}`} className="max-w-72">
             <img className="rounded-t-lg h-96" src="https://dummyimage.com/300x400/000/fff" alt="productImg" />
 
-            <div className="flex flex-col gap-6 border-l-2 border-r-2 border-b-2 rounded-b-lg">
-                <h1 className="text-xl">Title</h1>
+            <div className="flex flex-col gap-3 border-l-2 border-r-2 border-b-2 rounded-b-lg">
+                <div className="flex flex-row justify-between px-2 text-xl">
+                    <h2>Title</h2>
+                    <h2>$150</h2>
+                </div>
 
-                <p className="p-2 min-h-28 text-ellipsis line-clamp-4">
+                <p className=" min-h-28 p-2 text-ellipsis line-clamp-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatem cum ratione voluptatum
                     excepturi officiis alias commodi. Ab, iure tempore?Lorem ipsum dolor sit amet consectetur
                     adipisicing elit. Iure voluptatem cum ratione voluptatum excepturi officiis alias commodi. Ab, iure
