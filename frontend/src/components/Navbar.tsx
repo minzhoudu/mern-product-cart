@@ -1,13 +1,23 @@
-import { FC, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 import ShoppingCart from "./ShoppingCart";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../state/store";
+import { searchProduct } from "../state/product/productSlice";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const [isCartOpen, setIsCartOpen] = useState(false);
+
+    const searchProductsByTitleHandler = (e: FormEvent<HTMLInputElement>) => {
+        const keyword = e.currentTarget.value;
+
+        dispatch(searchProduct(keyword));
+    };
 
     const openCartHandler = () => {
         setIsCartOpen(true);
@@ -35,6 +45,7 @@ const Navbar: FC<NavbarProps> = () => {
                     </div>
 
                     <input
+                        onInput={searchProductsByTitleHandler}
                         type="text"
                         placeholder="search..."
                         className="rounded-md h-3/5 w-56 px-3 border border-black"

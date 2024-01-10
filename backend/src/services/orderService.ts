@@ -2,6 +2,10 @@ import { CreateOrderDto, UpdateOrderDto } from "../Dto/orderDto";
 import Order from "../models/Order";
 import Product from "../models/Product";
 
+export const getAllOrders = async () => {
+    return await Order.find().exec();
+};
+
 export const getById = async (orderId: string) => {
     return await Order.findById(orderId).exec();
 };

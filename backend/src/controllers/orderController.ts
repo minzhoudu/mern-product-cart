@@ -5,6 +5,11 @@ import * as orderService from "../services/orderService";
 import mongoose from "mongoose";
 import createHttpError from "http-errors";
 
+export const getAllOrders: RequestHandler = catchAsync(async (req, res) => {
+    const orders = await orderService.getAllOrders();
+    res.status(200).json(orders);
+});
+
 export const getOrderById: RequestHandler = catchAsync(async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.orderId)) throw createHttpError(400, "Invalid order id");
 
@@ -40,5 +45,5 @@ export const deleteOrder: RequestHandler = catchAsync(async (req, res) => {
 
     if (!order) throw createHttpError(404, "Order with that id not found");
 
-    res.status(200).json({ message: "Order deleted" });
+    res.status(200).json({ message: "Order deleted", order });
 });

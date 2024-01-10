@@ -1,23 +1,17 @@
 import { FC } from "react";
 import { Order as IOrder } from "../interfaces/orders";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../state/store";
+import { cancelOrderAsync } from "../state/order/orderSlice";
 
-interface OrderProps {}
+interface OrderProps {
+    order: IOrder;
+}
 
-const Order: FC<OrderProps> = () => {
-    const order: IOrder = {
-        _id: "1234567890",
-        products: [
-            {
-                quantity: 3,
-                productId: "1234567890",
-            },
-        ],
-        discountedTotal: 2300,
-        total: 2500,
-        totalProducts: 4,
-        totalQuantity: 12,
-        createdAt: "somedate",
-        updatedAt: "somedate",
+const Order: FC<OrderProps> = ({ order }) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const cancelOrderHandler = () => {
+        dispatch(cancelOrderAsync(order._id));
     };
 
     return (
@@ -28,10 +22,14 @@ const Order: FC<OrderProps> = () => {
                 <h2>Total Products: {order.totalProducts}</h2>
                 <h2>Total Quantity: {order.totalQuantity}</h2>
                 <h2>
-                    Total Price: <span className="line-through">${order.total}</span> ${order.discountedTotal}
+                    Total Price: <span className="line-through">${order.total}</span> $
+                    {order.discountedTotal.toFixed(1)}
                 </h2>
 
-                <button className="bg-red-500 self-center border border-red-500 text-white font-bold w-2/3 p-1 rounded-md hover:bg-white hover:text-red-500">
+                <button
+                    onClick={cancelOrderHandler}
+                    className="bg-red-500 self-center border border-red-500 text-white font-bold p-1 rounded-md hover:bg-white hover:text-red-500"
+                >
                     Cancel Order
                 </button>
             </div>

@@ -3,14 +3,19 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Product } from "../../interfaces/product";
 import axios from "axios";
 
-const initialState: { products: Product[] } = {
+const initialState: { products: Product[]; searchKeyword: string } = {
     products: [],
+    searchKeyword: "",
 };
 
 const productSlice = createSlice({
     name: "product",
     initialState,
-    reducers: {},
+    reducers: {
+        searchProduct: (state, action: PayloadAction<string>) => {
+            state.searchKeyword = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(setProductsAsync.pending, () => {
@@ -28,4 +33,5 @@ export const setProductsAsync = createAsyncThunk("product/setProductsAsync", asy
     return response.data;
 });
 
+export const { searchProduct } = productSlice.actions;
 export default productSlice.reducer;
