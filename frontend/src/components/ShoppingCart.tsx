@@ -60,12 +60,12 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ closeCart }) => {
     ];
 
     return (
-        <div className="relative h-screen w-96 flex flex-col items-center gap-10 px-10 py-20 bg-white border-4 border-orange-700">
+        <div className="relative h-screen w-96 flex flex-col items-center gap-10 px-10 py-20 bg-red-500">
             <button onClick={closeCart} className="absolute top-5 right-5 text-4xl font-bold">
                 <IoMdClose />
             </button>
 
-            <h1 className="text-2xl font-bold">ShoppingCart</h1>
+            <h1 className="text-2xl text-white font-bold">ShoppingCart</h1>
 
             <div className="w-2/3 flex flex-col gap-6">
                 {products.map((product) => {
@@ -73,7 +73,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ closeCart }) => {
                 })}
             </div>
 
-            <button className="absolute bottom-5 p-2 rounded-xl bg-orange-700 border border-orange-700 text-white font-bold hover:text-orange-700 hover:bg-white">
+            <button className="absolute bottom-5 p-2 rounded-xl bg-white text-red-500 font-bold hover:opacity-80">
                 Confirm Order
             </button>
         </div>

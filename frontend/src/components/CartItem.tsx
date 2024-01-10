@@ -7,7 +7,7 @@ interface CartItemProps {
 
 const CartItem: FC<CartItemProps> = ({ product }) => {
     return (
-        <div className="border border-orange-700 p-5 rounded-lg">
+        <div className="border border-white p-5 rounded-lg text-lg text-white italic">
             <h1>{product.title}(5) - $600</h1>
         </div>
     );
