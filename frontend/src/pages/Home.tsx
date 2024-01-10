@@ -5,7 +5,7 @@ interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
     return (
-        <div className="flex flex-wrap gap-20 w-screen p-20">
+        <div className="flex flex-wrap  gap-x-16 gap-y-20 p-20">
             <ProductTile />
             <ProductTile />
             <ProductTile />

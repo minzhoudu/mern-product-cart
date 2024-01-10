@@ -11,7 +11,7 @@ const ProductTile: FC<ProductTileProps> = () => {
             <div className="flex flex-col gap-6 border-l-2 border-r-2 border-b-2 rounded-b-lg">
                 <h1 className="text-xl">Title</h1>
 
-                <p className="p-2 text-ellipsis line-clamp-4">
+                <p className="p-2 min-h-28 text-ellipsis line-clamp-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatem cum ratione voluptatum
                     excepturi officiis alias commodi. Ab, iure tempore?Lorem ipsum dolor sit amet consectetur
                     adipisicing elit. Iure voluptatem cum ratione voluptatum excepturi officiis alias commodi. Ab, iure

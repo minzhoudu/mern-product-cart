@@ -6,7 +6,7 @@ interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
     return (
-        <div className="w-full bg-orange-700 shadow-[0px_4px_10px_1px_rgba(0,0,0,0.75)]">
+        <div className="sticky top-0 w-full bg-orange-700 shadow-[0px_4px_10px_1px_rgba(0,0,0,0.75)]">
             <div className="flex justify-between items-center text-center mx-10 h-16">
                 <NavLink to="/" className="px-5 font-bold text-xl hover:text-white">
                     HOME
