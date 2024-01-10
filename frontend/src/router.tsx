@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Navbar from "./components/RouterWrapper";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
     {
@@ -8,7 +9,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <div>Home</div>,
+                element: <Home />,
             },
             {
                 path: "product/:id",
