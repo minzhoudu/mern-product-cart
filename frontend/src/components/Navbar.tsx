@@ -1,6 +1,6 @@
-import { FC, MouseEvent, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { FC, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 import ShoppingCart from "./ShoppingCart";
 
