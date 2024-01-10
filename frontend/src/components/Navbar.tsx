@@ -2,15 +2,17 @@ import { FC, FormEvent, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
-import ShoppingCart from "./ShoppingCart";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTotalItems } from "../state/cart/cartSelector";
 import { searchProduct } from "../state/product/productSlice";
+import { AppDispatch } from "../state/store";
+import ShoppingCart from "./ShoppingCart";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const totalItems = useSelector(selectTotalItems);
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     const searchProductsByTitleHandler = (e: FormEvent<HTMLInputElement>) => {
@@ -58,7 +60,7 @@ const Navbar: FC<NavbarProps> = () => {
                         <FaShoppingCart />
 
                         <div className="absolute top-1 right-0 w-2 h-2 rounded-full bg-red-500 flex justify-center items-center p-2.5 text-white text-xs font-bold">
-                            3
+                            {totalItems}
                         </div>
                     </button>
                 </div>

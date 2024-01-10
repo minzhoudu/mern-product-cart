@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Order } from "../../interfaces/orders";
+import { CreateOrderDto, Order } from "../../interfaces/orders";
 import axios from "axios";
 
 const initialState: { orders: Order[] } = {
@@ -23,6 +23,12 @@ const orderSlice = createSlice({
 
 export const setOrdersAsync = createAsyncThunk("order/setOrdersAsync", async () => {
     const response = await axios.get("/api/orders");
+
+    return response.data;
+});
+
+export const createOrderAsync = createAsyncThunk("order/createOrderAsync", async (order: CreateOrderDto) => {
+    const response = await axios.post("/api/orders", order);
 
     return response.data;
 });

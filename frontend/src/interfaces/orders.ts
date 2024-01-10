@@ -14,3 +14,10 @@ export interface Order {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface CreateOrderDto {
+    products: {
+        productId: string;
+        quantity: number;
+    }[];
+}

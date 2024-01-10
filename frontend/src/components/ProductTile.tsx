@@ -13,7 +13,6 @@ interface ProductTileProps {
 const ProductTile: FC<ProductTileProps> = ({ product }) => {
     const dispatch = useDispatch<AppDispatch>();
     const addToCartHandler = () => {
-        console.log(product);
         dispatch(addToCart(product));
     };
 

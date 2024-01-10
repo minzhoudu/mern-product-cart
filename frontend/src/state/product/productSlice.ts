@@ -17,13 +17,9 @@ const productSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder
-            .addCase(setProductsAsync.pending, () => {
-                console.log("pending");
-            })
-            .addCase(setProductsAsync.fulfilled, (state, action: PayloadAction<Product[]>) => {
-                state.products = action.payload;
-            });
+        builder.addCase(setProductsAsync.fulfilled, (state, action: PayloadAction<Product[]>) => {
+            state.products = action.payload;
+        });
     },
 });
 
