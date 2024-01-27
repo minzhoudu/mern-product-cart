@@ -35,9 +35,15 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
     return (
         <div className="flex justify-center pt-10 gap-20">
             <div className="flex flex-col gap-1">
-                <Image url={imgUrl} alt={currentProduct?.title || "productImage"} width={400} height={300} />
+                <Image
+                    classname="self-center"
+                    url={imgUrl}
+                    alt={currentProduct?.title || "productImage"}
+                    width={400}
+                    height={300}
+                />
 
-                <div className="flex">
+                <div className="flex gap-5">
                     {currentProduct?.images?.map((image, index) => {
                         return (
                             <button className="hover:opacity-90" key={index}>

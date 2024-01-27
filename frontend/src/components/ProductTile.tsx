@@ -21,7 +21,11 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
     return (
         <div className="w-96 flex flex-col items-center">
             <NavLink to={`/product/${product._id}`} className="max-w-72">
-                <img className="rounded-t-lg w-[400px] h-[200px]" src={product.thumbnail} alt={product.title} />
+                <img
+                    className="rounded-t-lg w-[400px] h-[200px] object-contain"
+                    src={`/images/${product.thumbnail}`}
+                    alt={product.title}
+                />
 
                 <div className="flex flex-col gap-3 border-l-2 border-r-2 rounded-b-lg">
                     <div className="flex flex-row justify-between px-2 text-xl">
