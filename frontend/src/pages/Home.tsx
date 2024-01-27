@@ -18,8 +18,9 @@ const Home: FC<HomeProps> = () => {
     });
 
     useEffect(() => {
+        if (products.length) return;
         dispatch(setProductsAsync());
-    }, [dispatch]);
+    }, [dispatch, products.length]);
 
     return (
         <div className="flex flex-wrap p-20">

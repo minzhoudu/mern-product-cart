@@ -15,6 +15,9 @@ const orderSlice = createSlice({
             .addCase(setOrdersAsync.fulfilled, (state, action: PayloadAction<Order[]>) => {
                 state.orders = action.payload;
             })
+            .addCase(createOrderAsync.fulfilled, (state, action: PayloadAction<Order>) => {
+                state.orders.push(action.payload);
+            })
             .addCase(cancelOrderAsync.fulfilled, (state, action: PayloadAction<Order>) => {
                 state.orders = state.orders.filter((order) => order._id !== action.payload._id);
             });

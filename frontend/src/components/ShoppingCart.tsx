@@ -15,7 +15,7 @@ interface ShoppingCartProps {
 const ShoppingCart: FC<ShoppingCartProps> = ({ closeCart }) => {
     const cart: ICartItem[] = useSelector(selectCart);
     const cartTotal = useSelector(selectCartTotal);
-    console.log(cart);
+    
     const dispatch = useDispatch<AppDispatch>();
     const confirmOrderHandler = () => {
         const order: CreateOrderDto = {

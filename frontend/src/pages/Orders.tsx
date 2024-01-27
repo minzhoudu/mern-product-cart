@@ -12,8 +12,10 @@ const Orders: FC<OrdersProps> = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
+        if (orders.length) return;
+
         dispatch(setOrdersAsync());
-    }, [dispatch]);
+    }, [dispatch, orders.length]);
 
     return (
         <div className="flex flex-col items-center gap-10 p-20">

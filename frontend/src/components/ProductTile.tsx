@@ -16,6 +16,8 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
         dispatch(addToCart(product));
     };
 
+    const disableAddToCart = !product.stock;
+
     return (
         <div className="w-96 flex flex-col items-center">
             <NavLink to={`/product/${product._id}`} className="max-w-72">
@@ -32,10 +34,15 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
             </NavLink>
 
             <button
+                disabled={disableAddToCart}
                 onClick={addToCartHandler}
-                className="p-2 mt-5 w-2/5 place-self-center bg-orange-700 rounded-lg text-white font-bold border border-orange-700 hover:bg-white hover:text-orange-700"
+                className={`p-2 mt-5 w-2/5 place-self-center rounded-lg text-white font-bold border ${
+                    !disableAddToCart
+                        ? "bg-orange-700 border-orange-700 hover:bg-white hover:text-orange-700"
+                        : "bg-gray-600 cursor-not-allowed"
+                }`}
             >
-                Add to cart
+                {product.stock ? "Add to cart" : "Out of Stock"}
             </button>
         </div>
     );

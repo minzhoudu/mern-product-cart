@@ -1,11 +1,12 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Image from "../components/Image";
-import { selectProducts } from "../state/product/productSelector";
-import { AppDispatch } from "../state/store";
 import { addToCart } from "../state/cart/cartSlice";
+import { selectCurrentProduct } from "../state/product/productSelector";
+import { setProductByIdAsync } from "../state/product/productSlice";
+import { AppDispatch } from "../state/store";
 
 interface ProductDetailsProps {}
 
@@ -13,15 +14,23 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
     const { pid } = useParams<{ pid: string }>();
     const dispatch = useDispatch<AppDispatch>();
 
-    const products = useSelector(selectProducts);
-    const currentProduct = products.find((product) => product._id === pid);
+    const currentProduct = useSelector(selectCurrentProduct);
+
+    useEffect(() => {
+        if (!pid) return;
+
+        dispatch(setProductByIdAsync(pid));
+    }, [dispatch, pid]);
 
     const addToCartHandler = () => {
+        if (!currentProduct) return;
         dispatch(addToCart(currentProduct));
     };
 
     const defalutImgUrl = "https://dummyimage.com/600x600/000/fff";
     const imgUrl = currentProduct?.thumbnail ? currentProduct.thumbnail : defalutImgUrl;
+
+    const disableAddToCart = !currentProduct?.stock;
 
     return (
         <div className="flex justify-center pt-10 gap-20">
@@ -29,7 +38,7 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
                 <Image url={imgUrl} alt={currentProduct?.title || "productImage"} width={400} height={300} />
 
                 <div className="flex">
-                    {currentProduct?.images.map((image, index) => {
+                    {currentProduct?.images?.map((image, index) => {
                         return (
                             <button className="hover:opacity-90" key={index}>
                                 <Image url={image} alt={currentProduct.title} width={250} height={200} />
@@ -58,14 +67,18 @@ const ProductDetails: FC<ProductDetailsProps> = () => {
                 </div>
 
                 <div className="self-center">
-                    {/*TODO: check stock attribute and show in stock or out of stock, also disable Add To Cart button */}
-                    <h2 className="text-center mb-1">{currentProduct?.stock ? "In Stock" : "Out of Stock"}</h2>
+                    {currentProduct && currentProduct.stock > 0 && <h2 className="text-center mb-1">In Stock</h2>}
 
                     <button
                         onClick={addToCartHandler}
-                        className="p-3 bg-orange-700 border border-orange-700 text-white font-bold rounded-xl hover:bg-white hover:text-orange-700"
+                        disabled={disableAddToCart}
+                        className={`p-3 rounded-xl border font-bold text-white ${
+                            !disableAddToCart
+                                ? "bg-orange-700  border-orange-700 hover:bg-white hover:text-orange-700"
+                                : "bg-gray-600 cursor-not-allowed"
+                        } `}
                     >
-                        Add To Cart
+                        {currentProduct?.stock ? "Add To Cart" : "Out of Stock"}
                     </button>
                 </div>
             </div>
